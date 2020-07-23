@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="card-header">
+        {{ 'Product Name: ' + product.name }}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">Code:</div>
+                    <div class="col-md-8">
+                        {{ product.code }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">Name:</div>
+                    <div class="col-md-8">
+                        {{ product.name | uppercase | productName: '-' }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">Price:</div>
+                    <div class="col-md-8">
+                        {{ product.price | number: '1.2' }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">Price:</div>
+                    <div class="col-md-8">
+                        {{ product.available ? 'Yes' : 'No' }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">Rating:</div>
+                    <div class="col-md-8">
+                        <app-rating [rating]="product.rating"> </app-rating>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img
+                    class="center-block img-responsive"
+                    [src]="product.imageUrl"
+                    [title]="product.name"
+                />
+            </div>
+        </div>
+    </div>
+</div>

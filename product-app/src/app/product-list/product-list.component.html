@@ -1,1 +1,97 @@
-<p>product-list works!</p>
+<div class="card">
+    <div class="card-header">
+        List of Product Page
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col7md-4">
+                <input type="text" [(ngModel)]="filterData" />
+            </div>
+            <!-- <div class="col-md-4">
+                    <select>
+                        <option>Choosing</option>
+                        <option>TODO</option>
+                        <option>TODO</option>
+                    </select>
+                </div>
+            </div> -->
+            <div class="col-md-2">
+                <div>Filtered by: {{ filterData }}</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                <button class="btn btn-primary">
+                                    Product Image
+                                </button>
+                            </th>
+                            <th class="text-center">Product Code</th>
+                            <th class="text-center">Product Name</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Available</th>
+                            <th class="text-center">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="productList.length > 0">
+                        <tr
+                            *ngFor="
+                                let product of productList
+                                    | productFilter: filterData
+                            "
+                        >
+                            <th
+                                class="text-center"
+                                [routerLink]="['/product', product.code]"
+                                style="cursor: pointer;"
+                            >
+                                <img
+                                    src="{{ product.imageUrl }}"
+                                    alt="{{ product.imageUrl }}"
+                                    height="50%"
+                                />
+                            </th>
+                            <th
+                                [routerLink]="['/product', product.code]"
+                                style="cursor: pointer;"
+                            >
+                                {{ product.code }}
+                            </th>
+                            <th
+                                [routerLink]="['/product', product.code]"
+                                style="cursor: pointer;"
+                            >
+                                {{
+                                    product.name | uppercase | productName: '-'
+                                }}
+                            </th>
+                            <th class="text-right">
+                                {{ product.price | number: '1.2' }}
+                            </th>
+                            <th class="text-center">
+                                {{ product.available ? 'Yes' : 'No' }}
+                            </th>
+                            <th>
+                                <app-rating
+                                    [rating]="product.rating"
+                                    (ratingClicked)="onRatingClicked($event)"
+                                    style="cursor: pointer;"
+                                >
+                                </app-rating>
+                            </th>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="productList.length == 0">
+                        <tr>
+                            <th>
+                                ไม่มีข้อมูลสินค้า
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
